@@ -1,14 +1,16 @@
-// Manish Saha
+// Team : Manish Saha, Nalanda Sharadjaya
 // APCS2 pd05
-// HW13: LoList, LoLit
-// 2016-03-15
+// HW14: On the DLL
+// 2016-03-16
 
-public class LLNode {
+public class DLLNode {
+    private LLNode _prevNode;
     private String _cargo;
     private LLNode _nextNode;
 
     // constructor
-    public LLNode( String value, LLNode next ) {
+    public LLNode( DLLNode prev, String value, DLLNode next ) {
+	_prevNode = prev;
 	_cargo = value;
 	_nextNode = next;
     }
@@ -24,13 +26,23 @@ public class LLNode {
 	return old;
     }
 
-    public LLNode getNext() {
+    public DLLNode getNext() {
 	return _nextNode;
     }
 
-    public LLNode setNext( LLNode newNext ) {
-	LLNode old = getNext();
+    public DLLNode setNext( LLNode newNext ) {
+	DLLNode old = getNext();
 	_nextNode = newNext;
+	return old;
+    }
+
+    public DLLNode getPrev() {
+	return _prevNode;
+    }
+
+    public DLLNode setPrev(DLLNode newPrev) {
+	DLLNode old = getPrev();
+	_prevNode = newPrev;
 	return old;
     }
 
