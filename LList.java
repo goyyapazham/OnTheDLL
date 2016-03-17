@@ -23,7 +23,7 @@ public class LList implements List {
     }
 
     public void add( int index, String newVal ) {
-	if ( index < 0 || index > size() )
+	if ( index < 0 )
 	    throw new IndexOutOfBoundsException();
 	
 	DLLNode newNode; // node with newVal
@@ -34,14 +34,26 @@ public class LList implements List {
 
 	else {
 	    newNode = new DLLNode( null, newVal, null );
-	    for ( int i = 0; i < index; i++ ) {
-		tmp = tmp.getNext(); // stop slicing when you reach target index
-	    }
 	    
-	    tmp.getPrev().setNext( newNode ); // point tmp_prev's next to newNode
-	    newNode.setPrev( tmp.getPrev() ); // make newNode's prev point to tmp_prev
-	    tmp.setPrev( newNode ); // set tmp's prev to newNode
-	    newNode.setNext( tmp ); // set newNode's next to tmp
+	    if ( index >= size() ) {
+	        for ( int i = 0; i < size() - 1; i++ ) {
+		    tmp = tmp.getNext();
+		}
+
+		tmp.setNext( newNode );
+		newNode.setPrev( tmp );
+	    }
+
+	    else {
+		for ( int i = 0; i < index; i++ ) {
+		    tmp = tmp.getNext(); // stop slicing when you reach target index
+		}
+	    
+		tmp.getPrev().setNext( newNode ); // point tmp_prev's next to newNode
+		newNode.setPrev( tmp.getPrev() ); // make newNode's prev point to tmp_prev
+		tmp.setPrev( newNode ); // set tmp's prev to newNode
+		newNode.setNext( tmp ); // set newNode's next to tmp
+	    }
 	    _size++;
 	}
     }
@@ -128,27 +140,34 @@ public class LList implements List {
 
 	System.out.println( james );
 	System.out.println( "size: " + james.size() );
+	System.out.println();
 
 	james.add("beat");
 	System.out.println( james );
 	System.out.println( "size: " + james.size() );
+	System.out.println();
 
 	james.add("a");
 	System.out.println( james );
 	System.out.println( "size: " + james.size() );
+	System.out.println();
 
 	james.add("need");
 	System.out.println( james );
 	System.out.println( "size: " + james.size() );
+	System.out.println();
 
 	james.add("I");
 	System.out.println( james );
 	System.out.println( "size: " + james.size() );
+	System.out.println();
 
-	//	System.out.println( "2nd item is: " + james.get(1) );
+	System.out.println( "2nd item is: " + james.get(1) );
+	System.out.println();
 
-	//james.set( 1, "got" );
-	//System.out.println( "...and now 2nd item is: " + james.set(1,"got") );
+	james.set( 1, "got" );
+	System.out.println( "...and now 2nd item is: " + james.set(1,"got") );
+	System.out.println();
 
 	System.out.println( james );
 	System.out.println();
@@ -157,7 +176,7 @@ public class LList implements List {
 	System.out.println( james );
 	System.out.println();
 
-	james.add( 2, "poo" );
+	james.add( 5, "poo" );
 	System.out.println( james );
 	System.out.println();
 	
@@ -166,6 +185,14 @@ public class LList implements List {
 	System.out.println();
 
 	System.out.println( james.remove( 2 ) );
+	System.out.println( james );
+	System.out.println();
+
+	System.out.println( james.remove( 1 ) );
+	System.out.println( james );
+	System.out.println();
+
+	System.out.println( james.remove( 0 ) );
 	System.out.println( james );
 	System.out.println();
 
