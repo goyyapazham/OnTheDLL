@@ -59,8 +59,6 @@ public class LList implements List {
     }
 
     public String remove( int index ) {
-
-	_size--;
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
@@ -70,23 +68,30 @@ public class LList implements List {
 	if ( index == 0 ) {
 	    old = tmp.getCargo();
 	    tmp = tmp.getNext();
+
+	    if ( tmp != null )
+		tmp.setPrev( null );
+	    
 	    _head = tmp;
-	    return old;
-	}
-
-	for ( int i = 0; i < index; i++ ) {
-	    tmp = tmp.getNext();
-	}
-	old = tmp.getCargo();
-
-	if ( index < size() - 1 ) {
-	    tmp.getPrev().setNext( tmp.getNext() );
-	    tmp.getNext().setPrev( tmp.getPrev() );
 	}
 
 	else {
-	    tmp.getPrev().setNext( new DLLNode(null, null, null) );
+	    for ( int i = 0; i < index; i++ ) {
+		tmp = tmp.getNext();
+	    }
+	    old = tmp.getCargo();
+
+	    DLLNode prev = tmp.getPrev();
+	    DLLNode next = tmp.getNext();
+	    
+	    if ( prev != null ) {
+		tmp.getPrev().setNext( next );
+	    }
+	    if ( next != null ) {
+		tmp.getNext().setPrev( prev );
+	    }
 	}
+	_size--;
 	return old;
     }
 
@@ -179,7 +184,7 @@ public class LList implements List {
 	System.out.println( james );
 	System.out.println();
 	
-	System.out.println( james.remove( 0 ) );
+	System.out.println( james.remove( 5 ) );
 	System.out.println( james );
 	System.out.println();
 
