@@ -59,6 +59,8 @@ public class LList implements List {
     }
 
     public String remove( int index ) {
+
+	_size--;
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
@@ -83,10 +85,8 @@ public class LList implements List {
 	}
 
 	else {
-	    tmp.getPrev().setNext( new DLLNode( null, null, null ) );
+	    tmp.getPrev().setNext( new DLLNode(null, null, null) );
 	}
-
-	_size--;
 	return old;
     }
 
@@ -191,7 +191,7 @@ public class LList implements List {
 	System.out.println( james );
 	System.out.println();
 
-	System.out.println( james.remove( 0 ) );
+	System.out.println( james.remove( 1 ) );
 	System.out.println( james );
 	System.out.println();
 
