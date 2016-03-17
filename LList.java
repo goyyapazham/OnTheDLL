@@ -110,12 +110,10 @@ public class LList implements List {
     }
     
     public String toString() { 
-	String retStr = "HEAD->";
+	String retStr = "NULL<-HEAD->";
 	DLLNode tmp = _head; //init tr
 	while( tmp != null ) {
-	    if ( tmp.getNext() != null )
-		retStr += tmp.getCargo() + "-><-";
-	    else retStr += tmp.getCargo() + "->";
+	    retStr += "<-" + tmp.getCargo() + "->";
 	    tmp = tmp.getNext();
 	}
 	retStr += "NULL";
