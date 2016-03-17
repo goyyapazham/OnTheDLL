@@ -31,12 +31,12 @@ public class LList implements List {
 
 	else {
 	    newNode = new DLLNode( null, newVal, null );
-	    for ( int i = 0; i < index - 1; i++ ) {
+	    for ( int i = 0; i < index; i++ ) {
 		tmp = tmp.getNext(); // stop slicing when you reach target index
 	    }
 	    
-	    newNode.setPrev( tmp ); // point newNode's prev to tmp
-	    newNode.setNext( tmp.getNext() ); // set new node's cdr to remainder of alias
+	    tmp.getPrev.setNext( newNode ); // point newNode's prev to tmp
+	    newNode.setNext( tmp ); // set new node's cdr to remainder of alias
 	    tmp.getNext().setPrev( newNode ); // set tmp's cdr's prev from tmp to newNode
 	    tmp.setNext( newNode ); // point tmp's cdr to newNode
 	    _size++;

@@ -9,7 +9,7 @@ public class DLLNode {
     private LLNode _nextNode;
 
     // constructor
-    public LLNode( DLLNode prev, String value, DLLNode next ) {
+    public DLLNode( DLLNode prev, String value, DLLNode next ) {
 	_prevNode = prev;
 	_cargo = value;
 	_nextNode = next;
