@@ -3,8 +3,8 @@
 // HW14b -- On the DLL
 // 2016-03-16
 
-public class LList implements List {
-    private DLLNode _head;
+public class LList<T> implements List {
+    private DLLNode<T> _head;
     private int _size;
 
     public LList( ) {
@@ -12,28 +12,27 @@ public class LList implements List {
 	_size = 0;
     }
 
-    public boolean add( String newVal ) {
-        DLLNode tmp = new DLLNode( null, newVal, _head );
-	if ( _head != null ) {
-	    _head.setPrev( tmp );
-	}
-        _head = tmp;
-	_size++;
+    public boolean add( T newVal ) {
+	add( _head.size(), newVal );
 	return true;
     }
 
-    public void add( int index, String newVal ) {
+    public void add( int index, T newVal ) {
 	if ( index < 0 )
 	    throw new IndexOutOfBoundsException();
 	
-	DLLNode newNode; // node with newVal
-	DLLNode tmp = _head; // alias
+	DLLNode<T> newNode; // node with newVal
+	DLLNode<T> tmp = _head; // alias
 	if ( index == 0 ) {
-	    add( newVal );
+	    tmp = new DLLNode<T>( null, newVal, _head );
+	    if ( _head != null ) {
+		_head.setPrev( tmp );
+	    }
+	    _head = tmp;
 	}
 
 	else {
-	    newNode = new DLLNode( null, newVal, null );
+	    newNode = new DLLNode<T>( null, newVal, null );
 	    
 	    if ( index >= size() ) {
 	        for ( int i = 0; i < size() - 1; i++ ) {
@@ -54,16 +53,16 @@ public class LList implements List {
 		tmp.setPrev( newNode ); // set tmp's prev to newNode
 		newNode.setNext( tmp ); // set newNode's next to tmp
 	    }
-	    _size++;
 	}
+	_size++;
     }
 
-    public String remove( int index ) {
+    public T remove( int index ) {
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
-	String old;
-	DLLNode tmp = _head;
+	T old;
+	DLLNode<T> tmp = _head;
 
 	if ( index == 0 ) {
 	    old = tmp.getCargo();
@@ -81,8 +80,8 @@ public class LList implements List {
 	    }
 	    old = tmp.getCargo();
 
-	    DLLNode prev = tmp.getPrev();
-	    DLLNode next = tmp.getNext();
+	    DLLNode<T> prev = tmp.getPrev();
+	    DLLNode<T> next = tmp.getNext();
 	    
 	    if ( prev != null ) {
 		tmp.getPrev().setNext( next );
@@ -95,12 +94,12 @@ public class LList implements List {
 	return old;
     }
 
-    public String get( int index ) {
+    public T get( int index ) {
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
-	String retVal;
-	DLLNode tmp = _head;
+	T retVal;
+	DLLNode<T> tmp = _head;
 
 	for( int i = 0; i < index; i++ )
 	    tmp = tmp.getNext();
@@ -109,16 +108,16 @@ public class LList implements List {
 	return retVal;
     }
 
-    public String set( int index, String newVal ) {
+    public T set( int index, T newVal ) {
         if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
-	DLLNode tmp = _head;
+	DLLNode<T> tmp = _head;
 
 	for( int i = 0; i < index; i++ )
 	    tmp = tmp.getNext();
 
-	String oldVal = tmp.setCargo( newVal );
+	T oldVal = tmp.setCargo( newVal );
 	
 	return oldVal;
     }
@@ -129,7 +128,7 @@ public class LList implements List {
     
     public String toString() { 
 	String retStr = "NULL<-HEAD->";
-	DLLNode tmp = _head; //init tr
+	DLLNode<T> tmp = _head; //init tr
 	while( tmp != null ) {
 	    retStr += "<-" + tmp.getCargo() + "->";
 	    tmp = tmp.getNext();
