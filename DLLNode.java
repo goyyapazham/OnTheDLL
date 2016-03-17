@@ -4,9 +4,9 @@
 // 2016-03-16
 
 public class DLLNode {
-    private LLNode _prevNode;
+    private DLLNode _prevNode;
     private String _cargo;
-    private LLNode _nextNode;
+    private DLLNode _nextNode;
 
     // constructor
     public DLLNode( DLLNode prev, String value, DLLNode next ) {
@@ -30,7 +30,7 @@ public class DLLNode {
 	return _nextNode;
     }
 
-    public DLLNode setNext( LLNode newNext ) {
+    public DLLNode setNext( DLLNode newNext ) {
 	DLLNode old = getNext();
 	_nextNode = newNext;
 	return old;

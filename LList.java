@@ -13,7 +13,9 @@ public class LList implements List {
     }
 
     public boolean add( String newVal ) {
-        DLLNode tmp = new DLLNode( newVal, _head );
+        DLLNode tmp = new DLLNode( null, newVal, null );
+	_head.setPrev(tmp);
+	tmp.setNext(_head);
 	_head = tmp;
 	_size++;
 	return true;
@@ -35,7 +37,7 @@ public class LList implements List {
 		tmp = tmp.getNext(); // stop slicing when you reach target index
 	    }
 	    
-	    tmp.getPrev.setNext( newNode ); // point newNode's prev to tmp
+	    tmp.getPrev().setNext( newNode ); // point newNode's prev to tmp
 	    newNode.setNext( tmp ); // set new node's cdr to remainder of alias
 	    tmp.getNext().setPrev( newNode ); // set tmp's cdr's prev from tmp to newNode
 	    tmp.setNext( newNode ); // point tmp's cdr to newNode
