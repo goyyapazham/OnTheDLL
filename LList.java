@@ -86,6 +86,7 @@ public class LList implements List {
 	    tmp.getPrev().setNext( new DLLNode( null, null, null ) );
 	}
 
+	_size--;
 	return old;
     }
 
@@ -122,7 +123,7 @@ public class LList implements List {
     }
     
     public String toString() { 
-	String retStr = "NULL<-HEAD";
+	String retStr = "NULL<-HEAD->";
 	DLLNode tmp = _head; //init tr
 	while( tmp != null ) {
 	    retStr += "<-" + tmp.getCargo() + "->";
