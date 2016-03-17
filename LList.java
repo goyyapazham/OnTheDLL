@@ -77,7 +77,7 @@ public class LList implements List {
 	}
 	old = tmp.getCargo();
 
-	if ( index < size() - 1 ) {
+	if ( index < size() - 2 ) {
 	    tmp.getPrev().setNext( tmp.getNext() );
 	    tmp.getNext().setPrev( tmp.getPrev() );
 	}
