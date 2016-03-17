@@ -13,8 +13,11 @@ public class LList implements List {
     }
 
     public boolean add( String newVal ) {
-        DLLNode tmp = new DLLNode( newVal, _head );
-	_head = tmp;
+        DLLNode tmp = new DLLNode( null, newVal, _head );
+	if ( _head != null ) {
+	    _head.setPrev( tmp );
+	}
+        _head = tmp;
 	_size++;
 	return true;
     }
@@ -35,10 +38,10 @@ public class LList implements List {
 		tmp = tmp.getNext(); // stop slicing when you reach target index
 	    }
 	    
-	    tmp.getPrev.setNext( newNode ); // point newNode's prev to tmp
-	    newNode.setNext( tmp ); // set new node's cdr to remainder of alias
-	    tmp.getNext().setPrev( newNode ); // set tmp's cdr's prev from tmp to newNode
-	    tmp.setNext( newNode ); // point tmp's cdr to newNode
+	    tmp.getPrev().setNext( newNode ); // point tmp_prev's next to newNode
+	    newNode.setPrev( tmp.getPrev() ); // make newNode's prev point to tmp_prev
+	    tmp.setPrev( newNode ); // set tmp's prev to newNode
+	    newNode.setNext( tmp ); // set newNode's next to tmp
 	    _size++;
 	}
     }
@@ -68,7 +71,7 @@ public class LList implements List {
 	}
 
 	else {
-	    tmp.getPrev().setNext( new DLLNode( null,null,null ) );
+	    tmp.getPrev().setNext( new DLLNode( null, null, null ) );
 	}
 
 	return old;
@@ -110,7 +113,9 @@ public class LList implements List {
 	String retStr = "HEAD->";
 	DLLNode tmp = _head; //init tr
 	while( tmp != null ) {
-	    retStr += tmp.getCargo() + "->";
+	    if ( tmp.getNext() != null )
+		retStr += tmp.getCargo() + "-><-";
+	    else retStr += tmp.getCargo() + "->";
 	    tmp = tmp.getNext();
 	}
 	retStr += "NULL";
@@ -140,10 +145,10 @@ public class LList implements List {
 	System.out.println( james );
 	System.out.println( "size: " + james.size() );
 
-	System.out.println( "2nd item is: " + james.get(1) );
+	//	System.out.println( "2nd item is: " + james.get(1) );
 
-	james.set( 1, "got" );
-	System.out.println( "...and now 2nd item is: " + james.set(1,"got") );
+	//james.set( 1, "got" );
+	//System.out.println( "...and now 2nd item is: " + james.set(1,"got") );
 
 	System.out.println( james );
 	System.out.println();
