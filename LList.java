@@ -1,4 +1,4 @@
-// Team : Manish Saha, Nalanda Sharadjaya
+// Team nodelanda: Manish Saha, Nalanda Sharadjaya
 // APCS2 pd05
 // HW14b -- On the DLL
 // 2016-03-16
@@ -122,7 +122,7 @@ public class LList implements List {
     }
     
     public String toString() { 
-	String retStr = "NULL<-HEAD->";
+	String retStr = "NULL<-HEAD";
 	DLLNode tmp = _head; //init tr
 	while( tmp != null ) {
 	    retStr += "<-" + tmp.getCargo() + "->";
