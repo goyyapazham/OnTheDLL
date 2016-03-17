@@ -8,14 +8,13 @@ public class LList implements List {
     private int _size;
 
     public LList( ) {
-	_head = null;
+	_head = new DLLNode(null, null, null);
 	_size = 0;
     }
 
     public boolean add( String newVal ) {
-        DLLNode tmp = new DLLNode( null, newVal, null );
+        DLLNode tmp = new DLLNode( null, newVal, _head );
 	_head.setPrev(tmp);
-	tmp.setNext(_head);
 	_head = tmp;
 	_size++;
 	return true;
