@@ -3,7 +3,7 @@
 // HW14b -- On the DLL
 // 2016-03-16
 
-public class LList<T> implements List {
+public class LList<T> implements List<T> {
     private DLLNode<T> _head;
     private int _size;
 
@@ -13,7 +13,7 @@ public class LList<T> implements List {
     }
 
     public boolean add( T newVal ) {
-	add( _head.size(), newVal );
+	add( size(), newVal );
 	return true;
     }
 
